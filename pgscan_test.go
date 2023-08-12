@@ -13,7 +13,10 @@ import (
 const defaultDbURI = "postgres://user:password@localhost:5432/db?sslmode=disable"
 
 type Name struct {
-	Name string
+	Name struct {
+		Firstname string
+		Lastname  string
+	}
 }
 
 type User struct {
@@ -38,6 +41,7 @@ func BenchmarkRandallmlough(b *testing.B) {
 			b.Errorf("BenchmarkRandallmlough() failed to scan into []User. Reason:  %v", err)
 			b.FailNow()
 		}
+		_ = len(users)
 	}
 }
 
@@ -54,5 +58,6 @@ func BenchmarkScany(b *testing.B) {
 			b.Errorf("BenchmarkScany() failed to scan into []User. Reason:  %v", err)
 			b.FailNow()
 		}
+		_ = len(users)
 	}
 }

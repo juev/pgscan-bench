@@ -9,8 +9,8 @@ go test -bench=. -benchtime=10s
 goos: darwin
 goarch: arm64
 pkg: github.com/juev/pgscan-bench
-BenchmarkRandallmlough-8   	      78	 151587447 ns/op
-BenchmarkScany-8           	     126	  94053931 ns/op
+BenchmarkRandallmlough-8   	      52	 200721934 ns/op
+BenchmarkScany-8           	      81	 139823962 ns/op
 PASS
-ok  	github.com/juev/pgscan-bench	43.273s
+ok  	github.com/juev/pgscan-bench	22.308s
 ```
