@@ -31,3 +31,8 @@ status:
 .PHONY: all
 all:
 	print "Hello world"
+
+.PHONY: run
+run:
+	go test -bench=.
+
