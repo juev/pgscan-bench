@@ -17,14 +17,15 @@ database query.
 ## Results
 
 ```sh
-go test -bench=. -benchtime=10s
+$ go test -bench=. -benchtime=10s
 goos: darwin
 goarch: arm64
 pkg: github.com/juev/pgscan-bench
-BenchmarkRandallmlough-8   	      52	 200721934 ns/op
-BenchmarkScany-8           	      81	 139823962 ns/op
+BenchmarkRandallmlough-8   	      55	 209012668 ns/op
+BenchmarkScany-8           	      74	 150409709 ns/op
+BenchmarkManual-8          	      93	 125869095 ns/op
 PASS
-ok  	github.com/juev/pgscan-bench	22.308s
+ok  	github.com/juev/pgscan-bench	35.201s
 ```
 
 ## Note
@@ -35,3 +36,7 @@ the output string and the second run will be successful.
 
 This example was necessary only to make sure that the selected implementation of
 the function returns the desired result.
+
+## Update
+
+2023/08/13 added manual data parsing.
