@@ -32,7 +32,7 @@ type User struct {
 func BenchmarkRandallmlough(b *testing.B) {
 	testDB, err := pgxpool.Connect(context.Background(), defaultDbURI)
 	if err != nil {
-		b.Fail()
+		b.FailNow()
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
@@ -49,7 +49,7 @@ func BenchmarkRandallmlough(b *testing.B) {
 func BenchmarkScany(b *testing.B) {
 	testDB, err := pgxpool.Connect(context.Background(), defaultDbURI)
 	if err != nil {
-		b.Fail()
+		b.FailNow()
 	}
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
