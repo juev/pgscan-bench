@@ -17,15 +17,19 @@ database query.
 ## Results
 
 ```sh
-$ go test -bench=. -benchtime=10s
+$ make run
+go test -bench=.
 goos: darwin
 goarch: arm64
 pkg: github.com/juev/pgscan-bench
-BenchmarkRandallmlough-8   	      55	 209012668 ns/op
-BenchmarkScany-8           	      74	 150409709 ns/op
-BenchmarkManual-8          	      93	 125869095 ns/op
+BenchmarkRandallmlough-8          	       5	 209839208 ns/op
+BenchmarkRandallmloughScanOne-8   	    3798	    284995 ns/op
+BenchmarkScany-8                  	       7	 151589583 ns/op
+BenchmarkScanyScanOne-8           	    4476	    247141 ns/op
+BenchmarkManual-8                 	       8	 137495333 ns/op
+BenchmarkManualScanOne-8          	    4929	    208781 ns/op
 PASS
-ok  	github.com/juev/pgscan-bench	35.201s
+ok  	github.com/juev/pgscan-bench	8.558s
 ```
 
 ## Note
