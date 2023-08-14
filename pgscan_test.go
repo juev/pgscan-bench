@@ -66,6 +66,22 @@ func BenchmarkRandallmlough(b *testing.B) {
 	}
 }
 
+func BenchmarkRandallmloughScanOne(b *testing.B) {
+	testDB, err := pgxpool.Connect(context.Background(), defaultDbURI)
+	if err != nil {
+		b.FailNow()
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		rows, _ := testDB.Query(context.Background(), `SELECT * FROM "bench" LIMIT 1`)
+		var user User
+		if err := randallmlough.NewScanner(rows).Scan(&user); err != nil {
+			b.Errorf("BenchmarkRandallmloughScanOne() failed to scan into []User. Reason:  %v", err)
+			b.FailNow()
+		}
+	}
+}
+
 func BenchmarkScany(b *testing.B) {
 	testDB, err := pgxpool.Connect(context.Background(), defaultDbURI)
 	if err != nil {
@@ -80,6 +96,22 @@ func BenchmarkScany(b *testing.B) {
 			b.FailNow()
 		}
 		_ = len(users)
+	}
+}
+
+func BenchmarkScanyScanOne(b *testing.B) {
+	testDB, err := pgxpool.Connect(context.Background(), defaultDbURI)
+	if err != nil {
+		b.FailNow()
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		rows, _ := testDB.Query(context.Background(), `SELECT * FROM "bench" LIMIT 1`)
+		var user User
+		if err := scany.ScanOne(&user, rows); err != nil {
+			b.Errorf("BenchmarkScanyScanOne() failed to scan into []User. Reason:  %v", err)
+			b.FailNow()
+		}
 	}
 }
 
@@ -100,6 +132,21 @@ func BenchmarkManual(b *testing.B) {
 			users = append(users, user)
 		}
 		_ = len(users)
+	}
+}
+
+func BenchmarkManualScanOne(b *testing.B) {
+	testDB, err := pgxpool.Connect(context.Background(), defaultDbURI)
+	if err != nil {
+		b.FailNow()
+	}
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		row := testDB.QueryRow(context.Background(), `SELECT * FROM "bench" LIMIT 1`)
+		var user User
+		if err := row.Scan(&user.Id, &user.Title, &user.Body, &user.Tt, &user.Count, &user.Jj); err != nil {
+			b.FailNow()
+		}
 	}
 }
 
